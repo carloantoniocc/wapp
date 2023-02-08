@@ -5,15 +5,14 @@ from django.db import models
 class Broker(models.Model): 
     name = models.CharField(max_length=200)
     comision = models.IntegerField()
-    porc_entrada = models.IntegerField()
+    porc_entrada = models.DecimalField(max_digits=5, decimal_places=2,default=0)
 
     def __str__(self):
         return  self.name
 
 class Stock(models.Model):
     name = models.CharField(max_length=200)
-    cantidad = models.IntegerField()
-    valor = models.IntegerField()
+    broker_id = models.ForeignKey(Broker, on_delete= models.CASCADE)
 
     def __str__(self):
         return  self.name
@@ -37,6 +36,8 @@ class Briefcase(models.Model):
     broker_id = models.ForeignKey(Broker, on_delete= models.CASCADE)    
     risk_id = models.ForeignKey(Risk, on_delete= models.CASCADE)
     probability_id = models.ForeignKey(Probability, on_delete= models.CASCADE)
+    cantidad = models.IntegerField()
+    price = models.DecimalField(max_digits=5, decimal_places=2,default=0)
 
     def __str__(self):
         return  self.name
