@@ -9,7 +9,7 @@
 
 </head>
 <body>
-    
+    {{ todos }}
     <nav class="navbar navbar-expand-lg bg-body-tertiary">
         <div class="container-fluid">
           <a class="navbar-brand" href="#">Navbar</a>
@@ -38,43 +38,36 @@
 
 
     <main role="main" class="container">
-    <form class="form-horizontal" role="form" method="GET" action="">
-        <h1 class="mt-5">Ingreso de Portafolio</h1>
+ 
+      <table class="table">
+        <thead>
+          <tr>
+            <th scope="col">id</th>
+            <th scope="col">Accion</th>
+            <th scope="col">Broker</th>
+            <th scope="col">Comision de Entrada</th>
+            <th scope="col">Porcentaje</th>
+          </tr>
+        </thead>
+        <tbody>
 
-        <div class="form-group">
-            <label for="referente" class="col-md-4 control-label">Accion</label>
-            <div class="col-md-6">
-                <select id="referente" class="form-control" name="referente">
-                    <option value="">Seleccione Accion</option>
-                    {% for stock in stocks %}
-                        <option value="{{ stock.id }}">{{ stock.name }}</option>
-                    {% endfor %}
-                </select>
-            </div>
-        </div>        
+          {% for stock in stocks %}  
 
+          <tr>
+            <td>{{ stock.id }}</td>
+            <td>{{ stock.name }}</td>
+            <td>{{ stock.broker_id.name }}</td>
+            <td>{{ stock.broker_id.comision }}</td>
+            <td>{{ stock.broker_id.porc_entrada }}</td>
+          </tr>
 
+          {% endfor %}
 
-        <div class="form-group">
-            <label for="referente" class="col-md-4 control-label">Broker</label>
-            <div class="col-md-6">
-                <select id="referente" class="form-control" name="referente">
-                    <option value="">Seleccione Broker</option>
-                    {% for broker in brokers %}
-                        <option value="{{ broker.id }}" cata-chained={{stock.id }}>{{ broker.name }}</option>
-                    {% endfor %}
-                </select>
-            </div>
-        </div>
-
+        </tbody>
+      </table>
 
 
-        <div class="form-check">
-          <input type="checkbox" class="form-check-input" id="exampleCheck1">
-          <label class="form-check-label" for="exampleCheck1">Check me out</label>
-        </div>
-        <button type="submit" class="btn btn-primary">Submit</button>
-      </form>
+
     </main>
 
     <footer class="footer">
